@@ -10,7 +10,7 @@ npm run watch
 
 ##
 
-#Zadanie
+# Zadanie
 Je daný nasledujúci endpoint: https://fecko.org/php-test ktorý vracia JSON niekoľkých
 stoviek objektov, z ktorých každý má nasledujúcu štruktúru:
 
