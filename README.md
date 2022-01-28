@@ -1,12 +1,11 @@
-### Laravel/Vue App
+# Laravel/Vue App
 
 ## QUICK START
-# Install Dependencies
+### Install Dependencies
 composer install
-# Install JS Dependencies
+### Install JS Dependencies
 npm install
-
-# Watch Files
+### Watch Files
 npm run watch
 
 #Zadanie
