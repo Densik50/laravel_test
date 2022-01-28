@@ -22,7 +22,7 @@ stoviek objektov, z ktorých každý má nasledujúcu štruktúru:
     "created": "1992-09-18 13:53:58"
 }
 
-##___
+##
 
 Vytvorte jednoduchú web aplikáciu ktorá zobrazuje single page, kde sa nachádzajú 4
 buttony, z ktorých každý po kliknuti vykonáva jednu z nižšie uvedených úloh. Po kliknutí na
