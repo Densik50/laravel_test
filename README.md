@@ -8,6 +8,8 @@ npm install
 ### Watch Files
 npm run watch
 
+##
+
 #Zadanie
 Je daný nasledujúci endpoint: https://fecko.org/php-test ktorý vracia JSON niekoľkých
 stoviek objektov, z ktorých každý má nasledujúcu štruktúru:
@@ -21,8 +23,6 @@ stoviek objektov, z ktorých každý má nasledujúcu štruktúru:
     "math": "-3 + (12 * 2) - 4 = 45",
     "created": "1992-09-18 13:53:58"
 }
-
-##
 
 Vytvorte jednoduchú web aplikáciu ktorá zobrazuje single page, kde sa nachádzajú 4
 buttony, z ktorých každý po kliknuti vykonáva jednu z nižšie uvedených úloh. Po kliknutí na
