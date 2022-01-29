@@ -102,11 +102,18 @@ class TasksController extends Controller
             return false;
         });
         $datacollection = $datacollection->filter(function($value, $key) {
-            return (($value["third"] % 4) == 0);
+            if(($value["third"] % 4) == 0){
+                return true;
+            }
+            return false;
         });
 
         $datacollection = $datacollection->filter(function($value, $key) {
-            return ((($value["third"] % 5) == 0) or (($value["third"] % 6) == 0));
+            if((($value["third"] % 5) == 0) or (($value["third"] % 6) == 0))
+            {
+                return true;
+            }
+            return false;
         });
 
         $totalEntries_good = $datacollection->count();
@@ -333,6 +340,35 @@ class TasksController extends Controller
             "entries" => $output
         );
         
+        return $array;
+    }
+
+    public function getUserData(){
+        $ip = "Unknown address";
+        $user_agent = "Unknown user agent";
+        $device = "Unknown device";
+
+        //get ip address
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED']))
+            $ip = $_SERVER['HTTP_X_FORWARDED'];
+        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+            $ip = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_FORWARDED']))
+            $ip = $_SERVER['HTTP_FORWARDED'];
+        else if(isset($_SERVER['REMOTE_ADDR']))
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+        //get user agent
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        $array = array(
+            "ip" => $ip,
+            "useragent" => $user_agent
+        );
         return $array;
     }
 }

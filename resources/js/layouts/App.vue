@@ -56,11 +56,43 @@
         <div class="container">
             <router-view></router-view>
         </div>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-white shadow-sm fixed-bottom ">
+            <table class="table">
+                <tbody>
+                    <tr>
+                    <th scope="row">IP ADDRESS:</th>
+                    <td>{{this.userinfo['ip']}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">USER AGENT:</th>
+                    <td>{{this.userinfo['useragent']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </nav>
     </div>
 </template>
-
 <script>
 export default {
+data(){
+    return {
+        userinfo: {},
+    }
+},
+created() {
+    this.fetchUserInfo();
+    
+},
 
+methods: {
+    fetchUserInfo(){
+        fetch('api/userinfo')
+            .then(res => res.json())
+            .then(res => {
+                this.userinfo = res;
+            })
+    }
+}   
 };
 </script>

@@ -18,6 +18,7 @@ export default {
 data(){
     return {
         data: {},
+        userinfo: {},
     }
 },
 components: {
@@ -26,6 +27,7 @@ computed: {
 },
 created() {
     this.fetchTaskOutput();
+    this.fetchUserInfo();
     
 },
 
@@ -36,7 +38,14 @@ methods: {
             .then(res => {
                 this.data = res;
             })
+    },
+    fetchUserInfo(){
+        fetch('api/userinfo')
+            .then(res => res.json())
+            .then(res => {
+                this.userinfo = res;
+            })
     }
-}
+}   
 };
 </script>

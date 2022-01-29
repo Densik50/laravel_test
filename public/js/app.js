@@ -5323,7 +5323,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      userinfo: {}
+    };
+  },
+  created: function created() {
+    this.fetchUserInfo();
+  },
+  methods: {
+    fetchUserInfo: function fetchUserInfo() {
+      var _this = this;
+
+      fetch('api/userinfo').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.userinfo = res;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -5384,13 +5418,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      data: {}
+      data: {},
+      userinfo: {}
     };
   },
   components: {},
   computed: {},
   created: function created() {
     this.fetchTaskOutput();
+    this.fetchUserInfo();
   },
   methods: {
     fetchTaskOutput: function fetchTaskOutput() {
@@ -5400,6 +5436,15 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (res) {
         _this.data = res;
+      });
+    },
+    fetchUserInfo: function fetchUserInfo() {
+      var _this2 = this;
+
+      fetch('api/userinfo').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this2.userinfo = res;
       });
     }
   }
@@ -28718,6 +28763,31 @@ var render = function () {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [_c("router-view")], 1),
+    _vm._v(" "),
+    _c(
+      "nav",
+      {
+        staticClass:
+          "navbar navbar-expand-md navbar-dark bg-white shadow-sm fixed-bottom ",
+      },
+      [
+        _c("table", { staticClass: "table" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("IP ADDRESS:")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(this.userinfo["ip"]))]),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("USER AGENT:")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(this.userinfo["useragent"]))]),
+            ]),
+          ]),
+        ]),
+      ]
+    ),
   ])
 }
 var staticRenderFns = [

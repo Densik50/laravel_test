@@ -22,3 +22,4 @@ Route::get('task1', 'App\Http\Controllers\TasksController@task1');
 Route::get('task2', 'App\Http\Controllers\TasksController@task2');
 Route::get('task3', 'App\Http\Controllers\TasksController@task3');
 Route::get('task4', 'App\Http\Controllers\TasksController@task4');
+Route::get('userinfo', 'App\Http\Controllers\TasksController@getUserData');
