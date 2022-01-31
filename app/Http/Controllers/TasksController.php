@@ -21,6 +21,7 @@ class TasksController extends Controller
         $datacollection = collect($data);
         $totalEntries = $datacollection->count();
 
+        //clearing entries from colletion that dont contain all attributes
         $datacollection = $datacollection->filter(function($value, $key) {
             //echo json_encode($value);
             if(array_key_exists("id", $value) and 
@@ -40,14 +41,17 @@ class TasksController extends Controller
             return $returnv;
         });
 
+        //creating collection that contains first name
         $firstName = "laravel";
         $firstName_rev = strrev($firstName);
         $filteredCollection1 = $datacollection->where('name', $firstName_rev);
         
+        //creating collection that contains second name
         $secondName = "envoyer";
         $secondName_rev = strrev($secondName);
         $filteredCollection2 = $datacollection->where('name', $secondName_rev);
         
+        //merging collections
         $filteredCollection = $filteredCollection1->merge($filteredCollection2);
         $totalEntries_good = $filteredCollection->count();
         $totalEntries_bad = $totalEntries - $totalEntries_good;
@@ -78,6 +82,7 @@ class TasksController extends Controller
         $datacollection = collect($data);
         $totalEntries = $datacollection->count();
 
+        //clearing entries from colletion that dont contain all attributes
         $datacollection = $datacollection->filter(function($value, $key) {
             if(array_key_exists("id", $value) and 
             array_key_exists("name", $value) and 
@@ -95,12 +100,15 @@ class TasksController extends Controller
             return $returnv;
         });
 
+        //filtering collections and keeping only those whaere first / second = third
         $datacollection = $datacollection->filter(function($value, $key) {
             if(($value["first"] / $value["second"]) == $value["third"]){
                 return true;
             }
             return false;
         });
+
+        //filtering collections and keeping those where third % 4 = 0
         $datacollection = $datacollection->filter(function($value, $key) {
             if(($value["third"] % 4) == 0){
                 return true;
@@ -108,6 +116,7 @@ class TasksController extends Controller
             return false;
         });
 
+        //filtering collections and keeping only hose where third % 6 = 0 or where third % 5 = 0
         $datacollection = $datacollection->filter(function($value, $key) {
             if((($value["third"] % 5) == 0) or (($value["third"] % 6) == 0))
             {
@@ -146,6 +155,7 @@ class TasksController extends Controller
         $datacollection = collect($data);
         $totalEntries = $datacollection->count();
 
+        //clearing entries from colletion that dont contain all attributes
         $datacollection = $datacollection->filter(function($value, $key) {
             //echo json_encode($value);
             if(array_key_exists("id", $value) and 
@@ -165,8 +175,9 @@ class TasksController extends Controller
             return $returnv;
         });
         
+        //filtering and keeping only those where created date matches regex
         $datacollection = $datacollection->filter(function($value, $key) {
-            //2014-**-02 21:**:30 -> regex (2014-(0[1-9]|1[0-2])-02 21:[0-5][0-9]:30)
+            //2014-**-02 21:**:30 -> regex /2014-[0-1][0-9]-02 21:[0-5][0-9]:30/
             if(preg_match("/2014-[0-1][0-9]-02 21:[0-5][0-9]:30/", $value["created"]))
             {
                 return true;
@@ -194,6 +205,7 @@ class TasksController extends Controller
         return $array;
     }
 
+    //helping function for task4, returns precendence value of operator
     private function get_precedence_value($operator)
     {
         if($operator == '+' || $operator == '-')
@@ -209,6 +221,7 @@ class TasksController extends Controller
         return 0;
     }
 
+    //helping function for task4, solving 2 operands with operator
     private function apply_operator($operand1, $operand2, $operator)
     {
         if($operator == '+')
@@ -241,6 +254,7 @@ class TasksController extends Controller
         $datacollection = collect($data);
         $totalEntries = $datacollection->count();
 
+        //clearing entries from colletion that dont contain all attributes
         $datacollection = $datacollection->filter(function($value, $key) {
             //echo json_encode($value);
             if(array_key_exists("id", $value) and 
@@ -262,6 +276,7 @@ class TasksController extends Controller
         
 
         // https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+        //i wont comment this one, its just following already created algorithm, link ^
         $datacollection = $datacollection->filter(function($value, $key) {
             $divided = explode('=', $value["math"]);
             $math = $divided[0];
@@ -343,6 +358,7 @@ class TasksController extends Controller
         return $array;
     }
 
+    //function for obtaining data about user (useragent and ip)
     public function getUserData(){
         $ip = "Unknown address";
         $user_agent = "Unknown user agent";
